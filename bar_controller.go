@@ -14,6 +14,7 @@ limitations under the License.
 package main
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -271,7 +272,7 @@ func (c *BarController) syncHandler(key string) error {
 	deployment, err := c.deploymentsLister.Deployments(bar.Namespace).Get(deploymentName)
 	// If the resource doesn't exist, we'll create it
 	if errors.IsNotFound(err) {
-		deployment, err = c.kubeclientset.AppsV1().Deployments(bar.Namespace).Create(newBarDeployment(bar))
+		deployment, err = c.kubeclientset.AppsV1().Deployments(bar.Namespace).Create(context.TODO(), newBarDeployment(bar), metav1.CreateOptions{})
 	}
 
 	// If an error occurs during Get/Create, we'll requeue the item so we can
@@ -294,7 +295,7 @@ func (c *BarController) syncHandler(key string) error {
 	// should update the Deployment resource.
 	if bar.Spec.Replicas != nil && *bar.Spec.Replicas != *deployment.Spec.Replicas {
 		klog.V(4).Infof("Bar %s replicas: %d, deployment replicas: %d", name, *bar.Spec.Replicas, *deployment.Spec.Replicas)
-		deployment, err = c.kubeclientset.AppsV1().Deployments(bar.Namespace).Update(newBarDeployment(bar))
+		deployment, err = c.kubeclientset.AppsV1().Deployments(bar.Namespace).Update(context.TODO(), newBarDeployment(bar), metav1.UpdateOptions{})
 	}
 
 	// If an error occurs during Update, we'll requeue the item so we can
@@ -325,7 +326,7 @@ func (c *BarController) updateBarStatus(bar *shidav1alpha1.Bar, deployment *apps
 	// we must use Update instead of UpdateStatus to update the Status block of the Bar resource.
 	// UpdateStatus will not allow changes to the Spec of the resource,
 	// which is ideal for ensuring nothing other than resource status has been updated.
-	_, err := c.sampleclientset.SamplecontrollerV1alpha1().Bars(bar.Namespace).Update(barCopy)
+	_, err := c.sampleclientset.SamplecontrollerV1alpha1().Bars(bar.Namespace).Update(context.TODO(), barCopy, metav1.UpdateOptions{})
 	return err
 }
 
