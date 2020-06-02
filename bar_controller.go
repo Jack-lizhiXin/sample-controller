@@ -184,10 +184,6 @@ func (c *BarController) runWorker() {
 // attempt to process it, by calling the syncHandler.
 func (c *BarController) processNextWorkItem() bool {
 	obj, shutdown := c.workqueue.Get()
-	fmt.Println("-------------------")
-	fmt.Println(c.workqueue.Len())
-	fmt.Println(obj)
-	fmt.Println("-------------------")
 
 	if shutdown {
 		return false
