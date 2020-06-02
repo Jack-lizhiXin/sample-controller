@@ -52,10 +52,9 @@ func main() {
 	if err != nil {
 		klog.Fatalf("Error building kubeconfig: %s", err.Error())
 	}
-	fmt.Println(masterURL)
-	fmt.Println(kubeconfig)
-	fmt.Println(cfg)
+
 	kubeClient, err := kubernetes.NewForConfig(cfg)
+	fmt.Println(kubeClient)
 	if err != nil {
 		klog.Fatalf("Error building kubernetes clientset: %s", err.Error())
 	}
