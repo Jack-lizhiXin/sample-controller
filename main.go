@@ -54,7 +54,7 @@ func main() {
 	}
 
 	kubeClient, err := kubernetes.NewForConfig(cfg)
-	fmt.Println(kubeClient)
+
 	if err != nil {
 		klog.Fatalf("Error building kubernetes clientset: %s", err.Error())
 	}
