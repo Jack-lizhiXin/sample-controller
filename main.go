@@ -18,7 +18,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"time"
 
 	kubeinformers "k8s.io/client-go/informers"
