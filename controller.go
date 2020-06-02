@@ -199,6 +199,9 @@ func (c *Controller) processNextWorkItem() bool {
 		// not call Forget if a transient error occurs, instead the item is
 		// put back on the workqueue and attempted again after a back-off
 		// period.
+		fmt.Println("-----------------------8")
+		fmt.Println(obj)
+		fmt.Println("-----------------------8")
 		defer c.workqueue.Done(obj)
 		var key string
 		var ok bool
@@ -342,9 +345,7 @@ func (c *Controller) enqueueFoo(obj interface{}) {
 		utilruntime.HandleError(err)
 		return
 	}
-	fmt.Println("++++++++++++++")
-	fmt.Println(key)
-	fmt.Println("++++++++++++++")
+
 	c.workqueue.Add(key)
 }
 

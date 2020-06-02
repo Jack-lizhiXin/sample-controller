@@ -341,9 +341,7 @@ func (c *BarController) enqueueBar(obj interface{}) {
 		utilruntime.HandleError(err)
 		return
 	}
-	fmt.Println("------------------------")
-	fmt.Println(key)
-	fmt.Println("------------------------")
+
 	c.workqueue.AddRateLimited(key)
 }
 
