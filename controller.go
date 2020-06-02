@@ -251,9 +251,7 @@ func (c *Controller) syncHandler(key string) error {
 
 	// Get the Foo resource with this namespace/name
 	foo, err := c.foosLister.Foos(namespace).Get(name)
-	fmt.Println("---------------------------")
-	fmt.Println(foo)
-	fmt.Println("---------------------------")
+
 	if err != nil {
 		// The Foo resource may no longer exist, in which case we stop
 		// processing.
