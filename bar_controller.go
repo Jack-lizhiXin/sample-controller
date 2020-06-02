@@ -110,10 +110,6 @@ func NewBarController(
 		recorder:          recorder,
 	}
 
-	tque := workqueue.NewNamedRateLimitingQueue(workqueue.DefaultControllerRateLimiter(), "Jack")
-	fmt.Println("-------------------")
-	fmt.Println(tque.Get())
-	fmt.Println("-------------------")
 	klog.Info("Setting up event handlers")
 	// Set up an event handler for when Bar resources change
 	barInformer.Informer().AddEventHandler(cache.ResourceEventHandlerFuncs{
