@@ -274,9 +274,7 @@ func (c *Controller) syncHandler(key string) error {
 
 	// Get the deployment with the name specified in Foo.spec
 	deployment, err := c.deploymentsLister.Deployments(foo.Namespace).Get(deploymentName)
-	fmt.Println("++++++++++++++++++++++++")
-	fmt.Println(deployment)
-	fmt.Println("++++++++++++++++++++++++")
+
 	// If the resource doesn't exist, we'll create it
 	if errors.IsNotFound(err) {
 		deployment, err = c.kubeclientset.AppsV1().Deployments(foo.Namespace).Create(context.TODO(), newDeployment(foo), metav1.CreateOptions{})
@@ -327,6 +325,9 @@ func (c *Controller) updateFooStatus(foo *samplev1alpha1.Foo, deployment *appsv1
 	// NEVER modify objects from the store. It's a read-only, local cache.
 	// You can use DeepCopy() to make a deep copy of original object and modify this copy
 	// Or create a copy manually for better performance
+	fmt.Println("-------------------------")
+	fmt.Println(foo.ResourceVersion)
+	fmt.Println("-------------------------")
 	fooCopy := foo.DeepCopy()
 	fooCopy.Status.AvailableReplicas = deployment.Status.AvailableReplicas
 	// If the CustomResourceSubresources feature gate is not enabled,
