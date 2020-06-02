@@ -18,6 +18,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"time"
 
 	kubeinformers "k8s.io/client-go/informers"
@@ -51,7 +52,9 @@ func main() {
 	if err != nil {
 		klog.Fatalf("Error building kubeconfig: %s", err.Error())
 	}
-
+	fmt.Println(masterURL)
+	fmt.Println(kubeconfig)
+	fmt.Println(cfg)
 	kubeClient, err := kubernetes.NewForConfig(cfg)
 	if err != nil {
 		klog.Fatalf("Error building kubernetes clientset: %s", err.Error())
