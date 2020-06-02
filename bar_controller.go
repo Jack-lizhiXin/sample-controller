@@ -184,6 +184,10 @@ func (c *BarController) runWorker() {
 // attempt to process it, by calling the syncHandler.
 func (c *BarController) processNextWorkItem() bool {
 	obj, shutdown := c.workqueue.Get()
+	fmt.Println("-------------------")
+	fmt.Println(c.workqueue.Len())
+	fmt.Println(obj)
+	fmt.Println("-------------------")
 
 	if shutdown {
 		return false
@@ -241,9 +245,7 @@ func (c *BarController) processNextWorkItem() bool {
 func (c *BarController) syncHandler(key string) error {
 	// Convert the namespace/name string into a distinct namespace and name
 	namespace, name, err := cache.SplitMetaNamespaceKey(key)
-	fmt.Println("-----------------------")
-	fmt.Println(key)
-	fmt.Println("-----------------------")
+
 	if err != nil {
 		utilruntime.HandleError(fmt.Errorf("invalid resource key: %s", key))
 		return nil
