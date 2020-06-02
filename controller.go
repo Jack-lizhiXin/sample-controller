@@ -274,6 +274,9 @@ func (c *Controller) syncHandler(key string) error {
 
 	// Get the deployment with the name specified in Foo.spec
 	deployment, err := c.deploymentsLister.Deployments(foo.Namespace).Get(deploymentName)
+	fmt.Println("++++++++++++++++++++++++")
+	fmt.Println(deployment)
+	fmt.Println("++++++++++++++++++++++++")
 	// If the resource doesn't exist, we'll create it
 	if errors.IsNotFound(err) {
 		deployment, err = c.kubeclientset.AppsV1().Deployments(foo.Namespace).Create(context.TODO(), newDeployment(foo), metav1.CreateOptions{})
