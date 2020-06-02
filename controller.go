@@ -325,9 +325,7 @@ func (c *Controller) updateFooStatus(foo *samplev1alpha1.Foo, deployment *appsv1
 	// NEVER modify objects from the store. It's a read-only, local cache.
 	// You can use DeepCopy() to make a deep copy of original object and modify this copy
 	// Or create a copy manually for better performance
-	fmt.Println("-------------------------")
-	fmt.Println(foo.ResourceVersion)
-	fmt.Println("-------------------------")
+
 	fooCopy := foo.DeepCopy()
 	fooCopy.Status.AvailableReplicas = deployment.Status.AvailableReplicas
 	// If the CustomResourceSubresources feature gate is not enabled,
