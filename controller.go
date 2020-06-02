@@ -199,9 +199,7 @@ func (c *Controller) processNextWorkItem() bool {
 		// not call Forget if a transient error occurs, instead the item is
 		// put back on the workqueue and attempted again after a back-off
 		// period.
-		fmt.Println("-----------------------8")
-		fmt.Println(obj)
-		fmt.Println("-----------------------8")
+
 		defer c.workqueue.Done(obj)
 		var key string
 		var ok bool
@@ -253,6 +251,9 @@ func (c *Controller) syncHandler(key string) error {
 
 	// Get the Foo resource with this namespace/name
 	foo, err := c.foosLister.Foos(namespace).Get(name)
+	fmt.Println("---------------------------")
+	fmt.Println(foo)
+	fmt.Println("---------------------------")
 	if err != nil {
 		// The Foo resource may no longer exist, in which case we stop
 		// processing.
