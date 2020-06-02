@@ -342,7 +342,7 @@ func (c *BarController) enqueueBar(obj interface{}) {
 		return
 	}
 	fmt.Println("------------------------")
-	fmt.Println(obj)
+	fmt.Println(key)
 	fmt.Println("------------------------")
 	c.workqueue.AddRateLimited(key)
 }

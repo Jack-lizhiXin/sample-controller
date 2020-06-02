@@ -342,6 +342,9 @@ func (c *Controller) enqueueFoo(obj interface{}) {
 		utilruntime.HandleError(err)
 		return
 	}
+	fmt.Println("++++++++++++++")
+	fmt.Println(key)
+	fmt.Println("++++++++++++++")
 	c.workqueue.Add(key)
 }
 
